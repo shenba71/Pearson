@@ -9,7 +9,8 @@ import { ViewReportComponent } from './view-report/view-report.component';
 import { ReportStatusComponent } from './report-status/report-status.component'; 
 import { RecentActivityComponent } from './recent-activity/recent-activity.component';
 import { ReportSchedulerComponent } from './report-scheduler/report-scheduler.component';
-
+import { DrilldownReportComponent } from './drilldown-report/drilldown-report.component';
+ 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'reportStatus', component: ReportStatusComponent},
     { path: 'recentActivity', component: RecentActivityComponent},
     { path: 'reportScheduler', component: ReportSchedulerComponent},
+    { path: 'drilldownReport', component: DrilldownReportComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

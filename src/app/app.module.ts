@@ -27,6 +27,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RecentActivityComponent } from './recent-activity/recent-activity.component';
 import { ReportSchedulerComponent } from './report-scheduler/report-scheduler.component';
+import { DrilldownReportComponent } from './drilldown-report/drilldown-report.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ReportSchedulerComponent } from './report-scheduler/report-scheduler.co
     ReportStatusComponent,
     MainNavComponent,
     RecentActivityComponent,
-    ReportSchedulerComponent
+    ReportSchedulerComponent,
+    DrilldownReportComponent
   ],
   imports: [
     BrowserModule,
