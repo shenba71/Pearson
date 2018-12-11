@@ -17,8 +17,9 @@ export class MainNavComponent {
   userRole:string;
   adminRoles: Array<string>;
   userRoles: Array<String>;
-  private static ADMIN_ROLES = ["admin"];
-  private static USER_ROLES = ["user"];
+  private static ADMIN_ROLES = ["pearson_admin",'custumor_admin'];
+  private static 
+  private static USER_ROLES = ["report_viewer"];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

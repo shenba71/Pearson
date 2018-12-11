@@ -4,6 +4,9 @@ import { RecentActivityDataSource } from './recent-activity-datasource';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services';
+
 
 @Component({
   selector: 'app-recent-activity',
@@ -15,9 +18,14 @@ export class RecentActivityComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: RecentActivityDataSource;
 
-  constructor(private http: HttpClient) {
-    
+  constructor(private http: HttpClient,
+    private authenticationService: AuthenticationService,
+    private router: Router) {
+      if (!this.authenticationService.currentUserValue) { 
+        this.router.navigateByUrl('/login');
   }
+}
+  
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'destination', 'mode'];

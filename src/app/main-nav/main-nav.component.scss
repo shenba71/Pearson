@@ -3,7 +3,7 @@
 }
 
 .side-nav-style {
-  background-color: #3f51b5;
+  background-color: #195b8a;
   color: whitesmoke;
 }
 
@@ -12,13 +12,16 @@
 }
 
 .sidenav .mat-toolbar  {
-  background:#3f51b5
+  background:#195b8a;
+  color:whitesmoke
+  //background-image: url('src/assets/pearson_logo.png');
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: #195b8a;
 }
 
 .mat-ripple:hover {
@@ -26,7 +29,7 @@
 }
 
 .active-list-item {
-  color:blue !important; /* Note: You could also use a custom theme */
+  color: #195b8a !important; /* Note: You could also use a custom theme */
   background-color: wheat;
 }
 

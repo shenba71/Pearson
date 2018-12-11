@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services';
 
 @Component({
   selector: 'app-drilldown-report',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrilldownReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+  ) { 
+    if (!this.authenticationService.currentUserValue) { 
+      this.router.navigateByUrl('/login');
+  }
+  }
 
   ngOnInit() {
   }

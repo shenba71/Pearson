@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services';
 
 declare var visualize: any;
 declare var $ :any;
@@ -9,7 +11,14 @@ declare var $ :any;
 })
 export class CreateReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+  ) { 
+    if (!this.authenticationService.currentUserValue) { 
+      this.router.navigateByUrl('/login');
+  }
+  }
 
   ngOnInit() {
   this.initializeDashBoard();
