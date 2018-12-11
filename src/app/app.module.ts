@@ -26,6 +26,7 @@ import { MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, 
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RecentActivityComponent } from './recent-activity/recent-activity.component';
+import { ReportSchedulerComponent } from './report-scheduler/report-scheduler.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { RecentActivityComponent } from './recent-activity/recent-activity.compo
     ViewReportComponent,
     ReportStatusComponent,
     MainNavComponent,
-    RecentActivityComponent
+    RecentActivityComponent,
+    ReportSchedulerComponent
   ],
   imports: [
     BrowserModule,

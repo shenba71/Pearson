@@ -7,10 +7,11 @@
     <mat-nav-list>
         <a mat-list-item routerLink='/createReport' routerLinkActive="active-list-item" *ngIf="adminRoles.indexOf(currentUser.role)>-1"><mat-icon>add_circle_outline
           </mat-icon>
-          Create Report</a>
+          Dashboard</a>
         <a mat-list-item routerLink='/viewReport' routerLinkActive="active-list-item"><mat-icon>dvr</mat-icon>View Report</a>
-        <a mat-list-item routerLink='/reportStatus' routerLinkActive="active-list-item"><mat-icon>select_all</mat-icon>View Report Status</a>
+        <a mat-list-item routerLink='/reportStatus' routerLinkActive="active-list-item"><mat-icon>select_all</mat-icon>Adhoc Report Designer</a>
         <a mat-list-item routerLink='/recentActivity' routerLinkActive="active-list-item"><mat-icon>equalizer</mat-icon>Recent Report Activity</a>
+        <a mat-list-item routerLink='/reportScheduler' routerLinkActive="active-list-item"><mat-icon>query_builder</mat-icon>Report Scheduler</a>
         <a mat-list-item (click)= "logout()"><mat-icon>keyboard_return</mat-icon>Logout</a>
     </mat-nav-list>
   </mat-sidenav>
