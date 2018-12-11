@@ -22,7 +22,11 @@ import { CreateReportComponent } from './create-report/create-report.component';
 import { ViewReportComponent } from './view-report/view-report.component';
 import { ReportStatusComponent } from './report-status/report-status.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule} from '@angular/material';
+import { MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule} from '@angular/material';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { RecentActivityComponent } from './recent-activity/recent-activity.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, 
     NavigationComponent,
     CreateReportComponent,
     ViewReportComponent,
-    ReportStatusComponent
+    ReportStatusComponent,
+    MainNavComponent,
+    RecentActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -49,14 +55,18 @@ import { MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, 
     MatNativeDateModule, 
     MatIconModule, 
     MatSidenavModule, 
-    MatListModule
+    MatListModule, LayoutModule, MatTableModule, MatPaginatorModule, MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS}
 
     // provider used to create fake backend
-    fakeBackendProvider
+    fakeBackendProvider,
+    RecentActivityComponent
+    
+    
 ],
 bootstrap: [AppComponent]
 })

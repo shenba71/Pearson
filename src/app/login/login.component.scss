@@ -1,13 +1,17 @@
 .login-container {
     max-width: 800px;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
 }
 
     .center {
         margin: auto;
-        width: 50%;
+        width: 30%;
         border: 3px solid #00000014;
         padding: 10px;
         margin-top: 15%;
+      }
+
+      .form-text {
+        color: midnightblue;
       }

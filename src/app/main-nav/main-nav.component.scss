@@ -1,0 +1,52 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.side-nav-style {
+  background-color: #3f51b5;
+  color: whitesmoke;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar  {
+  background:#3f51b5
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-ripple:hover {
+  background: blueviolet;
+}
+
+.active-list-item {
+  color:blue !important; /* Note: You could also use a custom theme */
+  background-color: wheat;
+}
+
+.mat-list-item {
+  .mat-icon {
+    margin-right: 5px;
+    height: 19px;
+    width: 22px;
+    font-size: 19px;
+  }
+}
+
+.mat-list-base {
+  .mat-list-item{
+    font-size: 14px;
+  }
+  
+}
+
+.mat-header-cell{
+  color: darkslategrey;
+  font-weight: bolder;
+}

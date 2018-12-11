@@ -21,26 +21,21 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         let userResponse = new User();
-        userResponse.firstName = 'Test';
-        userResponse.id = 1;
-        userResponse.lastName = 'User';
-        userResponse.password = 'test';
-        userResponse.token='qwertyuiop';
-        userResponse.username = 'testuser';
-        // return this.http.post<any>(`/users/authenticate`, { username, password })
-        //     .pipe(map(user => {
-        //         // login successful if there's a jwt token in the response
-        //         if (user && user.token) {
-        //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //             localStorage.setItem('currentUser', JSON.stringify(user));
-        //             this.currentUserSubject.next(user);
-        //         }
+        console.log('authenticating user '+username);
+        return this.http.post<any>(`http://172.24.150.67:3000/route/auth/login`, { username, password })
+             .pipe(map(user => {
+                 // login successful if there's a jwt token in the response
+                if (user && user.role) {
+                    console.log(user);
+                     // store user details and jwt token in local storage to keep user logged in between page refreshes
+                     localStorage.setItem('currentUser', JSON.stringify(user));
+                     this.currentUserSubject.next(user);
+                     
+                }
 
-        //         return user;
-        //     }));
-        localStorage.setItem('currentUser', JSON.stringify(userResponse));
-        this.currentUserSubject.next(userResponse);
-        return userResponse;
+                 return user;
+             }));
+        
     }
 
     logout() {
