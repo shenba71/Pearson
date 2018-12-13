@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var visualize: any;
+declare var $ :any;
 @Component({
   selector: 'app-report-scheduler',
   templateUrl: './report-scheduler.component.html',
@@ -9,7 +11,7 @@ export class ReportSchedulerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  
+  }  
 
 }
