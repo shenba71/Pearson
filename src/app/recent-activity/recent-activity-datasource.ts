@@ -18,14 +18,15 @@ export interface RecentActivityItem {
 
 /**
  * Data source for the RecentActivity view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
+ * encapsulate all logic for fetching and manipulating the displayed da
+ * ta
  * (including sorting, pagination, and filtering).
  */
 
-export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
-  data: RecentActivityItem[];
+export class RecentActivityDataSource extends DataSource<any> {
+  data: [];
 
-  constructor(private paginator: MatPaginator, private sort: MatSort,private result:RecentActivityItem[]) {
+  constructor(private paginator: MatPaginator, private sort: MatSort,private result:[]) {
     super();
     console.log('fetching audits');
     this.data = result;
@@ -48,7 +49,7 @@ export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<RecentActivityItem[]> {
+  connect(): Observable<Element[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -60,9 +61,11 @@ export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
     // Set the paginator's length
     this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return observableOf(this.data);
+
+    // return merge(...dataMutations).pipe(map(() => {
+    //   return this.getPagedData(this.getSortedData([...this.data]));
+    // }));
   }
 
   /**
@@ -75,7 +78,7 @@ export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: RecentActivityItem[]) {
+  private getPagedData(data: any[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -84,7 +87,7 @@ export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: RecentActivityItem[]) {
+  private getSortedData(data: any[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -92,10 +95,10 @@ export class RecentActivityDataSource extends DataSource<RecentActivityItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'destination': return compare(a.destination, b.destination, isAsc);
-        case 'mode' : return compare(a.mode,b.mode,isAsc);
-        default: return 0;
+        // case 'name': return compare(a.name, b.name, isAsc);
+        // case 'destination': return compare(a.destination, b.destination, isAsc);
+        // case 'mode' : return compare(a.mode,b.mode,isAsc);
+         default: return 0;
       }
     });
   }

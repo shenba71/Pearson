@@ -21,9 +21,9 @@ export class RecentActivityComponent implements OnInit {
   constructor(private http: HttpClient,
     private authenticationService: AuthenticationService,
     private router: Router) {
-      if (!this.authenticationService.currentUserValue) { 
-        this.router.navigateByUrl('/login');
-  }
+      // if (!this.authenticationService.currentUserValue) { 
+      //   this.router.navigateByUrl('/login');
+  //}
 }
   
 
@@ -35,6 +35,10 @@ export class RecentActivityComponent implements OnInit {
     this.fetchReportAudits().subscribe(data=>{
          console.log(data);
          result = data;
+         if(data){
+           console.log(Object.keys(result[0]));
+          this.displayedColumns = Object.keys(result[0]);
+         }
          console.log(result);
          this.dataSource = new RecentActivityDataSource(this.paginator, this.sort,result);
        })
@@ -43,7 +47,7 @@ export class RecentActivityComponent implements OnInit {
 
   fetchReportAudits() {
     console.log('getting results');
-    return this.http.get<any>(`http://172.24.150.67:3000/route/reports/fetchAudit`).pipe(map(response=>{
+    return this.http.get<any>(`http://localhost:3000/route/reports/fetchAudit`).pipe(map(response=>{
       console.log('response ' +response);
       return response;
     }));

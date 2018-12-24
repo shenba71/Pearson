@@ -1,13 +1,25 @@
+<!-- <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index" matColumnDef="{{disCol}}">
+      <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+      <mat-cell *matCellDef="let element "> {{element.disCol}}
+      </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table> -->
+
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
     <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    <ng-container *ngFor="let discol of displayedColumns; let colIndex = index" matColumnDef="{{discol}}">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{discol}}</th>
+      <td mat-cell *matCellDef="let row">{{row[discol]}}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
+    <!-- <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
@@ -20,7 +32,7 @@
       <ng-container matColumnDef="mode">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Mode</th>
           <td mat-cell *matCellDef="let row">{{row.mode}}</td>
-        </ng-container>
+        </ng-container> -->
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

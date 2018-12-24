@@ -22,7 +22,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         let userResponse = new User();
         console.log('authenticating user '+username);
-        return this.http.post<any>(`http://172.24.150.67:3000/route/auth/login`, { username, password })
+        return this.http.post<any>(`http://localhost:3000/route/auth/login`, { username, password })
              .pipe(map(user => {
                  // login successful if there's a jwt token in the response
                 if (user && user.role) {
