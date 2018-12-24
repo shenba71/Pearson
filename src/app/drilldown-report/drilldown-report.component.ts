@@ -24,9 +24,9 @@ export class DrilldownReportComponent implements OnInit {
     this.loadDrillDownChart();
   }
 
-  loadDrillDownChart() {
-  
-    var firstView = "/adhoc/aru/DrillDownParentView";
+  loadDrillDownChart() {  
+    //var firstView = "/adhoc/aru/DrillDownParentView";
+    var firstView = "/public/AdHocViews/ProductsView";
   
   visualize({
     auth: {
@@ -35,7 +35,7 @@ export class DrilldownReportComponent implements OnInit {
     }
   }, function(v) {
     function renderView() {
-      $("#backButton").hide();
+      $("#backButton").hide();      
       var first = v.adhocView({
         resource: firstView,
         container: "#firstContainer",
@@ -44,12 +44,15 @@ export class DrilldownReportComponent implements OnInit {
             click: function(ev, data, defaultHandler, extendedData) {
               console.log(data);
               console.log('data measure is '+ data.Measures);
-              console.log('data is '+ data["REPORT_TEST_USERSESSIONS.USERID"]);
+             // console.log('data is '+ data["REPORT_TEST_USERSESSIONS.USERID"]);
               var measureSelected = data.Measures;
-              var userid = data["REPORT_TEST_USERSESSIONS.USERID"];
-              $("#field").html("<span>Field: <b>" + data["REPORT_TEST_USERSESSIONS.USERID"] + "</b></span>") 
-  
-              updateView(measureSelected, userid)
+              //var userid = data["REPORT_TEST_USERSESSIONS.USERID"];
+              var productName = data["REPORT_TEST_PRODUCT_DETAILS_ARRAY.NAME"];
+              $("#field").html("<span>Field: <b>" + data["REPORT_TEST_PRODUCT_DETAILS_ARRAY.NAME"] + "</b></span>") 
+            var params = {       
+              ["NAME_1"]: [productName]               
+             };
+              updateView(productName, params, null)
             }
           }
         },
@@ -65,18 +68,43 @@ export class DrilldownReportComponent implements OnInit {
     
     renderView()
     
-    function updateView(measure, userId) {
-      var showCostView = "/adhoc/aru/DrillDownChildView";
-      
-      $("#backButton").show();
-  
-      
-        $("#measure").html("<span>Measure: <b>userId</b></span>")
+    function updateView(productName, params, view) {
+      //var showCostView = "/adhoc/aru/DrillDownChildView";
+      var showChildView = null;
+      if(view === null) {
+        showChildView = "/public/AdHocViews/ProductLimitsView";
+      } else {
+        showChildView = view;
+      }
+
+      $("#backButton").show();      
+        
         var costView = v.adhocView({
-          resource: showCostView,
+          resource: showChildView,
           container: "#firstContainer",
-          params: {
-            ["USERID_1"]: [userId]
+          params: params,
+          linkOptions: {
+            events: {
+              click: function(ev, data, defaultHandler, extendedData) {
+                console.log(data);
+                console.log('data measure is '+ data.Measures);
+               // console.log('data is '+ data["REPORT_TEST_USERSESSIONS.USERID"]);
+                var limitType = data["REPORT_TEST_PRODUCT_DETAILS_ARRAY_LIMITS.LIMITTYPE"];
+                // No more drilling down if the parameter is undefined
+                if (typeof limitType === 'undefined') { 
+                  return;
+                }
+                console.log('productName is '+productName + ' limit type is '+ limitType);
+                (<HTMLInputElement>document.getElementById('hiddenProductName')).value = productName;                
+                (<HTMLInputElement>document.getElementById('hiddenView')).value = showChildView;                 
+                var params = {       
+                  ["NAME_1"]: [productName],
+                  ["LIMITTYPE_1"]: [limitType],               
+                 };
+                $("#field").html("<span>Field: <b>" + data["REPORT_TEST_PRODUCT_DETAILS_ARRAY_LIMITS.LIMITTYPE"] + "</b></span>");   
+                updateView(productName, params, '/public/AdHocViews/ProductLimitsDetailView')
+              }
+            }
           },
           error: function(e) {
             console.log(e);
@@ -89,7 +117,20 @@ export class DrilldownReportComponent implements OnInit {
       $("input[name='goBack']").click(doIt);
       
       function doIt() {
-        renderView()
+        var hiddenProductName = (<HTMLInputElement>document.getElementById('hiddenProductName')).value;
+        var hiddenView = (<HTMLInputElement>document.getElementById('hiddenView')).value;
+        var params = {       
+          ["NAME_1"]: [hiddenProductName]               
+         };
+         if (hiddenProductName !== '') { 
+          (<HTMLInputElement>document.getElementById('hiddenProductName')).value = '';                
+          (<HTMLInputElement>document.getElementById('hiddenView')).value = '';
+          updateView(hiddenProductName, params, hiddenView);
+          $("#field").html("<span>Field: <b>" + hiddenProductName + "</b></span>") 
+        } else {
+          renderView()
+          $("#field").html("") 
+        }
       } 
     } 
     
