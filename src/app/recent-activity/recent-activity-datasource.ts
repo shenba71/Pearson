@@ -61,11 +61,11 @@ export class RecentActivityDataSource extends DataSource<any> {
     // Set the paginator's length
     this.paginator.length = this.data.length;
 
-    return observableOf(this.data);
+    //return observableOf(this.data);
 
-    // return merge(...dataMutations).pipe(map(() => {
-    //   return this.getPagedData(this.getSortedData([...this.data]));
-    // }));
+     return merge(...dataMutations).pipe(map(() => {
+       return this.getPagedData(this.getSortedData([...this.data]));
+     }));
   }
 
   /**
@@ -95,10 +95,11 @@ export class RecentActivityDataSource extends DataSource<any> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
+        
         // case 'name': return compare(a.name, b.name, isAsc);
         // case 'destination': return compare(a.destination, b.destination, isAsc);
         // case 'mode' : return compare(a.mode,b.mode,isAsc);
-         default: return 0;
+         default: return compare(a[this.sort.active],b[this.sort.active],isAsc);
       }
     });
   }

@@ -28,14 +28,14 @@ export class RecentActivityComponent implements OnInit {
   
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['name', 'destination', 'mode'];
+  displayedColumns = [];
 
   ngOnInit() {
     let result = null;
     this.fetchReportAudits().subscribe(data=>{
          console.log(data);
          result = data;
-         if(data){
+         if(data.length > 0 ){
            console.log(Object.keys(result[0]));
           this.displayedColumns = Object.keys(result[0]);
          }
