@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { ViewChildren } from '@angular/core'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material';
 
 import { AuthenticationService } from 'src/app/_services';
 import { User } from 'src/app/_models';
@@ -12,8 +14,9 @@ import { User } from 'src/app/_models';
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.scss'],
 })
-export class MainNavComponent {
+export class MainNavComponent {  
   currentUser: User;
+  @ViewChildren('drawer') menu : MatSidenav;
   userRole:string;
   adminRoles: Array<string>;
   userRoles: Array<String>;
